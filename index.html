@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thi Chứng Chỉ Hành Nghề Xây Dựng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="font-sans bg-gray-100">
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-700 flex items-center gap-2 select-none">
+        <img src="Img/Gen/Logo.jpg" class="w-10 h-10 rounded-full" alt="Logo" />
+        <span>Thi Chứng Chỉ XD</span>
+      </h1>
+      <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
+        <a href="#dmch" class="hover:text-blue-600">Danh mục câu hỏi</a>
+        <a href="#thithu" class="hover:text-blue-600">Thi thử</a>
+        <a href="#tintuc" class="hover:text-blue-600">Tin tức</a>
+        <a href="#hotro" class="hover:text-blue-600">Hỗ trợ hồ sơ thi</a>
+        <a href="#dangnhap" class="hover:text-blue-600">Đăng nhập</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto mt-6 px-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Main -->
+    <main class="lg:col-span-3 space-y-10">
+
+      <!-- Slide -->
+      <section aria-label="Slide" class="select-none">
+        <div class="relative overflow-hidden rounded-2xl shadow-md bg-white">
+          <div id="slideTrack" class="flex transition-transform duration-700 ease-in-out"></div>
+          <button id="prevBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full w-9 h-9 grid place-items-center shadow">&#10094;</button>
+          <button id="nextBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full w-9 h-9 grid place-items-center shadow">&#10095;</button>
+        </div>
+      </section>
+
+      <!-- Giới thiệu -->
+      <section class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Giới thiệu</h2>
+        <p class="text-gray-600 leading-relaxed">
+          Website hỗ trợ học và thi thử chứng chỉ hành nghề xây dựng. Người dùng có thể truy cập kho câu hỏi phong phú theo từng chuyên ngành, cấp hạng; tham gia các bài thi thử sát với đề thi thật; và cập nhật tin tức, quy định mới nhất.
+        </p>
+      </section>
+
+      <!-- Danh mục -->
+      <section id="dmch">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Danh mục chứng chỉ</h2>
+ <table class="w-full border border-gray-300 text-center">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border p-2">Hạng I</th>
+        <th class="border p-2">Hạng II</th>
+        <th class="border p-2">Hạng III</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-blue-500 text-white rounded w-full" data-hang="I" data-loai="CM">Chuyên Môn</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-blue-500 text-white rounded w-full" data-hang="II" data-loai="CM">Chuyên Môn</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-blue-500 text-white rounded w-full" data-hang="III" data-loai="CM">Chuyên Môn</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-green-500 text-white rounded w-full" data-hang="I" data-loai="LC">Luật Chung</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-green-500 text-white rounded w-full" data-hang="II" data-loai="LC">Luật Chung</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-green-500 text-white rounded w-full" data-hang="III" data-loai="LC">Luật Chung</button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-purple-500 text-white rounded w-full" data-hang="I" data-loai="LR">Luật Riêng</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-purple-500 text-white rounded w-full" data-hang="II" data-loai="LR">Luật Riêng</button>
+        </td>
+        <td class="border p-2">
+          <button class="px-3 py-2 bg-purple-500 text-white rounded w-full" data-hang="III" data-loai="LR">Luật Riêng</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+        <div id="fields" class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+      </section>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-6">
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Tài khoản</h3>
+        <p class="text-gray-600">Bạn chưa đăng nhập</p>
+        <a href="#dangnhap" class="text-blue-600 text-sm hover:underline">Đăng nhập ngay</a>
+      </div>
+
+      <div id="thithu" class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Một số bài thi</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-1">
+          <li>Bài thi Pháp luật chung</li>
+          <li>Bài thi Giám sát XD</li>
+          <li>Bài thi Thiết kế điện</li>
+          <li>Bài thi Hạ tầng kỹ thuật</li>
+        </ul>
+      </div>
+
+      <div id="tintuc" class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Tin tức mới</h3>
+        <ul id="tintuc-list" class="space-y-2 text-sm text-gray-600"></ul>
+      </div>
+
+      <div id="hotro" class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Hỗ trợ hồ sơ thi</h3>
+        <p class="text-gray-600 text-sm">Tư vấn thủ tục, biểu mẫu và cách nộp hồ sơ trực tuyến.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-10 bg-gray-800 text-gray-200 py-6">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3">
+      <p>© 2025 Thi Chứng Chỉ XD. All rights reserved.</p>
+      <nav class="space-x-4 text-sm">
+        <a href="#" class="hover:underline">Liên hệ</a>
+        <a href="#" class="hover:underline">Chính sách</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Firebase + JS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy, limit, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9FpbD2UQ9k-6V6J2valKvVEXiL-r42tI",
+      authDomain: "thi-cchn-xd.firebaseapp.com",
+      projectId: "thi-cchn-xd",
+      storageBucket: "thi-cchn-xd.firebasestorage.app",
+      messagingSenderId: "919472549520",
+      appId: "1:919472549520:web:994dc0c28f077b4d4cb215",
+      measurementId: "G-V54RWTK57J"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Tin tức mới
+    async function loadTinMoi() {
+      const listEl = document.getElementById("tintuc-list");
+      const q = query(collection(db, "baiviet"), orderBy("NgayTao", "desc"), limit(5));
+      const snapshot = await getDocs(q);
+      listEl.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="chitiet.html?id=${doc.id}" class="hover:underline">${data.TieuDe || "Không có tiêu đề"}</a>`;
+        listEl.appendChild(li);
+      });
+    }
+
+    // Slide
+    async function loadSlides() {
+      const track = document.getElementById("slideTrack");
+      const q = query(collection(db, "baiviet"), where("Loai", "==", "Slide"));
+      const snapshot = await getDocs(q);
+      track.innerHTML = "";
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const a = document.createElement("a");
+        a.href = data.Link || "#";
+        a.className = "w-full flex-shrink-0 relative block h-56 md:h-72";
+        a.innerHTML = `
+          <img src="${data.HinhAnh || "Img/Slide/default.jpg"}"
+               class="absolute inset-0 w-full h-full object-cover"
+               alt="${data.TieuDe || "Slide"}" />
+          <span class="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded">
+            ${data.TieuDe || ""}
+          </span>`;
+        track.appendChild(a);
+      });
+      initCarousel();
+    }
+
+    function initCarousel() {
+      const track = document.getElementById("slideTrack");
+      const slides = Array.from(track.children);
+      let slideIndex = 0;
+      function goToSlide(idx) {
+        slideIndex = (idx + slides.length) % slides.length;
+        track.style.transform = `translateX(-${slideIndex * 100}%)`;
+      }
+      let timer = setInterval(() => goToSlide(slideIndex + 1), 3500);
+      document.getElementById("prevBtn").onclick = () => { clearInterval(timer); goToSlide(slideIndex - 1); timer = setInterval(() => goToSlide(slideIndex + 1), 3500); };
+      document.getElementById("nextBtn").onclick = () => { clearInterval(timer); goToSlide(slideIndex + 1); timer = setInterval(() => goToSlide(slideIndex + 1), 3500); };
+    }
+
+    // Danh mục lĩnh vực
+  // Danh mục lĩnh vực (key: viết tắt, value: tên đầy đủ)
+  const fields = {
+    KSDH: "Khảo sát địa hình",
+    KSDC: "Khảo sát địa chất công trình",
+    QH: "Thiết kế quy hoạch",
+    KCCT: "Thiết kế Kết cấu công trình",
+    KTM: "Thiết kế Công trình Khai thác mỏ",
+    DB: "Thiết kế Công trình Đường bộ",
+    DS: "Thiết kế Công trình Đường sắt",
+    CH: "Thiết kế Công trình Cầu Hầm",
+    DTHH: "Thiết kế Công trình Đường thủy nội địa Hàng hải",
+    TLDD: "Thiết kế Công trình Thủy lợi, đê điều",
+    CTN: "Thiết kế Công trình Cấp nước thoát nước",
+    CTR: "Thiết kế Công trình Xử lý chất thải rắn",
+    HTD: "Thiết kế cơ điện Hệ thống điện",
+    CTNCT: "Thiết kế cơ điện Hệ thống cấp thoát nước công trình",
+    TGTN: "Thiết kế cơ điện Hệ thống thông gió cấp thoát nhiệt",
+    GSXD: "Giám sát công tác Xây dựng công trình",
+    GSTB: "Giám sát công tác lắp đặt thiết bị",
+    DG: "Lĩnh vực định giá",
+    QLDA: "Quản lý dự án đầu tư"
+  };
+
+  // Màu nền theo hạng
+  const rankStyle = {
+    I:   { cardBg: "bg-blue-50",    cardHover: "hover:bg-blue-100" },
+    II:  { cardBg: "bg-emerald-50", cardHover: "hover:bg-emerald-100" },
+    III: { cardBg: "bg-amber-50",   cardHover: "hover:bg-amber-100" }
+  };
+
+  let currentRank = "I";
+  let currentLoai = "CM";
+
+  function renderFields() {
+    const c = document.getElementById("fields");
+    const { cardBg, cardHover } = rankStyle[currentRank];
+    c.innerHTML = Object.entries(fields).map(([key, value]) => `
+      <a href="cauhoi.html?hang=${currentRank}&linhvuc=${key}&loai=${currentLoai}"
+         class="block p-4 ${cardBg} ${cardHover} rounded-lg shadow-sm transition">
+        ${value} - Hạng ${currentRank}
+      </a>
+    `).join("");
+  }
+
+  // Bắt sự kiện click cho các nút bảng
+  document.querySelectorAll("table button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentRank = btn.dataset.hang;
+      currentLoai = btn.dataset.loai;
+      renderFields();
+    });
+  });
+
+    // Init
+    loadTinMoi();
+    loadSlides();
+    renderFields();
+  </script>
+</body>
+</html>

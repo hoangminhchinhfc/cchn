@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chi tiết bài viết</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-gray-100">
+  <!-- Header giữ nguyên -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<a href="index.html" class="flex items-center gap-2 select-none">
+  <img src="Img/Gen/Logo.jpg" class="w-10 h-10 rounded-full" alt="Logo" />
+  <span class="text-2xl font-bold text-blue-700">THI CHỨNG CHỈ XÂY DỰNG</span>
+</a>
+
+      <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
+        <a href="index.html#dmch" class="hover:text-blue-600">Danh mục câu hỏi</a>
+        <a href="index.html#thithu" class="hover:text-blue-600">Thi thử</a>
+        <a href="index.html#tintuc" class="hover:text-blue-600">Tin tức</a>
+        <a href="index.html#hotro" class="hover:text-blue-600">Hỗ trợ hồ sơ thi</a>
+        <a href="index.html#dangnhap" class="hover:text-blue-600">Đăng nhập</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto mt-6 px-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Nội dung chi tiết -->
+    <main class="lg:col-span-3 space-y-6 bg-white p-6 rounded-xl shadow">
+      <h1 id="tieude" class="text-3xl font-bold text-gray-800">Đang tải...</h1>
+      <p id="ngaytao" class="text-sm text-gray-500"></p>
+      <img id="anhdaidien" class="w-full max-w-xl rounded-lg shadow" style="display:none" />
+      <div id="noidung" class="prose max-w-none"></div>
+    </main>
+
+    <!-- Sidebar giữ nguyên -->
+    <aside class="lg:col-span-1 space-y-6">
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Tài khoản</h3>
+        <p class="text-gray-600">Bạn chưa đăng nhập</p>
+        <a href="#dangnhap" class="text-blue-600 text-sm hover:underline">Đăng nhập ngay</a>
+      </div>
+
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Một số bài thi</h3>
+        <ul class="list-disc list-inside text-gray-600 space-y-1">
+          <li>Bài thi Pháp luật chung</li>
+          <li>Bài thi Giám sát XD</li>
+          <li>Bài thi Thiết kế điện</li>
+          <li>Bài thi Hạ tầng kỹ thuật</li>
+        </ul>
+      </div>
+
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Tin tức mới</h3>
+        <ul id="tintuc-list" class="space-y-2 text-sm text-gray-600"></ul>
+      </div>
+
+      <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="font-bold text-gray-700 mb-2">Hỗ trợ hồ sơ thi</h3>
+        <p class="text-gray-600 text-sm">Tư vấn thủ tục, biểu mẫu và cách nộp hồ sơ trực tuyến.</p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer giữ nguyên -->
+  <footer class="mt-10 bg-gray-800 text-gray-200 py-6">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3">
+      <p>© 2025 Thi Chứng Chỉ XD. All rights reserved.</p>
+      <nav class="space-x-4 text-sm">
+        <a href="#" class="hover:underline">Liên hệ</a>
+        <a href="#" class="hover:underline">Chính sách</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC9FpbD2UQ9k-6V6J2valKvVEXiL-r42tI",
+      authDomain: "thi-cchn-xd.firebaseapp.com",
+      projectId: "thi-cchn-xd",
+      storageBucket: "thi-cchn-xd.appspot.com",
+      messagingSenderId: "919472549520",
+      appId: "1:919472549520:web:994dc0c28f077b4d4cb215",
+      measurementId: "G-V54RWTK57J"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Lấy ID từ URL
+    const id = new URLSearchParams(window.location.search).get("id");
+
+    async function loadChiTiet() {
+      if (!id) {
+        document.getElementById("tieude").textContent = "Không tìm thấy bài viết";
+        return;
+      }
+      try {
+        const snap = await getDoc(doc(db, "baiviet", id));
+        if (!snap.exists()) {
+          document.getElementById("tieude").textContent = "Bài viết không tồn tại";
+          return;
+        }
+        const data = snap.data();
+        document.getElementById("tieude").textContent = data.TieuDe || "";
+        document.getElementById("noidung").innerHTML = data.NoiDung || "";
+        if (data.HinhAnh) {
+          const img = document.getElementById("anhdaidien");
+          img.src = data.HinhAnh;
+          img.style.display = "block";
+        }
+        if (data.NgayTao) {
+          let date = data.NgayTao.toDate ? data.NgayTao.toDate() : new Date(data.NgayTao);
+          document.getElementById("ngaytao").textContent = "Ngày đăng: " + date.toLocaleString("vi-VN");
+        }
+      } catch (err) {
+        console.error("❌ Lỗi khi load chi tiết:", err);
+      }
+    }
+
+    async function loadTinMoi() {
+      const listEl = document.getElementById("tintuc-list");
+      const q = query(collection(db, "baiviet"), orderBy("NgayTao", "desc"), limit(5));
+      const snapshot = await getDocs(q);
+      listEl.innerHTML = "";
+      snapshot.forEach(docSnap => {
+        const d = docSnap.data();
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.textContent = d.TieuDe || "Không có tiêu đề";
+        a.href = `chitiet.html?id=${docSnap.id}`;
+        li.appendChild(a);
+        listEl.appendChild(li);
+      });
+    }
+
+    loadChiTiet();
+    loadTinMoi();
+  </script>
+</body>
+</html>
